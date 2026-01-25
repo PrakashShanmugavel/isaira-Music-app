@@ -3,7 +3,7 @@
 A Spotify-style music streaming application built using the MERN stack.
 
 ## 🚀 Live Demo
-👉 https://isaira.pages.dev
+👉 https://eafd7641.isaira-music-app.pages.dev
 
 ## 🛠 Tech Stack
 - React + Vite
