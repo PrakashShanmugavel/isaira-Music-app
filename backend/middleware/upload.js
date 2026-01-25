@@ -1,20 +1,25 @@
 import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 import cloudinary from "../utils/cloudinary.js";
-import CloudinaryStorage from 'multer-storage-cloudinary';
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: async (req, file) => {
-    // Helper to determine folder based on file type
     const isAudio = file.mimetype.startsWith("audio");
-    
+
     return {
       folder: isAudio ? "spotify/songs" : "spotify/images",
-      resource_type: "auto", // Necessary for audio files
+      resource_type: "auto", // REQUIRED for audio
+      format: isAudio ? "mp3" : undefined,
     };
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 20 * 1024 * 1024, // 20MB max (important for Render)
+  },
+});
 
 export default upload;
